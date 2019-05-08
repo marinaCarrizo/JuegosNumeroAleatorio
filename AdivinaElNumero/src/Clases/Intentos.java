@@ -15,7 +15,7 @@ public class Intentos {
 
     private int regular;
     private int coinciden;
-    NumeroAleatorio numAleatorio;
+    private NumeroAleatorio numAleatorio;
 
     public Intentos() {
     }
