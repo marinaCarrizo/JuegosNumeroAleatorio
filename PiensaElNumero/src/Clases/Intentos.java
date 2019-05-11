@@ -6,6 +6,7 @@
 package Clases;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -46,7 +47,9 @@ public class Intentos {
     }
 
     public void Adivinar(NumeroAleatorio aleatorio) {
+        listaDigitos(aleatorio);
         do {
+
             Scanner reader = new Scanner(System.in);
 
             System.out.println("Ingrese cantidad de coincidencias");
@@ -63,22 +66,51 @@ public class Intentos {
 
             if (coinciden == 4) {
                 System.out.println("GANE!! El numero es " + aleatorio.getNumAleatorio());
-            } else {
-                if (coinciden != 0 && regular != 0) {
-
-                    for (int i = 0; i < 4; i++) {
-                        if (aleatorio.getDigitosList().contains(Character.getNumericValue(aleatorio.getNumAleatorio().charAt(i)))) {
-                            continue;
-                        } else {
-                            aleatorio.getDigitosList().add(Character.getNumericValue(aleatorio.getNumAleatorio().charAt(i)));
-                        }
-                    }
-                }
-                aleatorio.elegirNum();
-
             }
+            if (regular >= 2) {
 
+                for (int i = 0; i < 4; i++) {
+                    aleatorio.getRegulares().add(Character.getNumericValue(aleatorio.getNumAleatorio().charAt(i)));
+
+                }
+                listaDigitos(aleatorio);
+                if (coinciden >= 2) {
+                    for (int i = 0; i < 4; i++) {
+                        aleatorio.getDigitosList().add(Character.getNumericValue(aleatorio.getNumAleatorio().charAt(i)));
+
+                    }
+                    listaDigitos(aleatorio);
+                }
+            } else {
+                listaDigitos(aleatorio);
+            }
         } while (coinciden != 4);
     }
 
+    private void listaDigitos(NumeroAleatorio n) {
+        if (!n.getDigitosList().isEmpty() && n.getDigitosList().size() > 9) {
+            n.elegirNum(n.getDigitosList());
+        }
+        if (!n.getRegulares().isEmpty() && n.getDigitosList().isEmpty()) {
+            n.elegirNum(n.getRegulares());
+        } else {
+            n.elegirNum(n.getDigitos());
+        }
+    }
 }
+
+
+/*else {
+ if (coinciden + regular==4) {
+
+ for (int i = 0; i < 4; i++) {
+ if (aleatorio.getDigitosList().contains(Character.getNumericValue(aleatorio.getNumAleatorio().charAt(i)))) {
+ continue;
+ } else {
+ aleatorio.getDigitosList().add(Character.getNumericValue(aleatorio.getNumAleatorio().charAt(i)));
+ }
+ }
+ }
+ */            
+
+            //}

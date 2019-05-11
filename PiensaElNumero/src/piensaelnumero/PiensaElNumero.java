@@ -22,8 +22,8 @@ public class PiensaElNumero {
         
         System.out.println("Piensa un numero de 4 digitos");
         NumeroAleatorio aleatorio = new NumeroAleatorio();
-        aleatorio.elegirNum();
-        System.out.println("Es: "+ aleatorio.getNumAleatorio());
+        
+      
         Intentos i = new Intentos();
         i.Adivinar(aleatorio);
 

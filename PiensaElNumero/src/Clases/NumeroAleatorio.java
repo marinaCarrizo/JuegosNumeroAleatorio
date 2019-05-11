@@ -6,6 +6,7 @@
 package Clases;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -15,11 +16,21 @@ import java.util.Random;
 public class NumeroAleatorio {
 
     private String numAleatorio;
-    private final int digitos[] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    private final ArrayList digitos = new ArrayList(10);
     private ArrayList digitosList = new ArrayList();
+    private ArrayList regulares = new ArrayList();
+    int numero;
 
     public NumeroAleatorio() {
+        for (int i = 0; i < 10; i++) {
+            numero = (int) (Math.random() * 10);
 
+            if (digitos.contains(numero)) {
+                i--;
+            } else {
+                digitos.add(numero);
+            }
+        }
     }
 
     public String getNumAleatorio() {
@@ -30,7 +41,7 @@ public class NumeroAleatorio {
         this.numAleatorio = numAleatorio;
     }
 
-    public int[] getDigitos() {
+    public ArrayList getDigitos() {
         return digitos;
     }
 
@@ -40,52 +51,45 @@ public class NumeroAleatorio {
 
     public void setDigitosList(ArrayList digitosList) {
         this.digitosList = digitosList;
-    }
-    
-    
-//Metodo que forma un numero aleatorio de 4 dígitos utilizando el array digitos
 
-    public String elegirNum() {
+    }
+
+    public ArrayList getRegulares() {
+        return regulares;
+    }
+
+    public void setRegulares(ArrayList regulares) {
+        this.regulares = regulares;
+    }
+
+//Metodo que forma un numero aleatorio de 4 dígitos utilizando el array digitos
+    public String elegirNum(ArrayList l) {
 
         ArrayList num = new ArrayList();
         Random rand = new Random();
         for (int i = 0; i < 4; i++) {
-            if (digitosList == null) {
-                int numero = rand.nextInt(digitos.length);
 
-                if (numero == 0 && i == 0) { // si el primer numero es 0, se descarta
+            int n = rand.nextInt(l.size());
+
+            if (n == 0 && i == 0) { // si el primer numero es 0, se descarta
+                i--;
+            } else {
+                if (num.contains(n)) { //verifica si el digito esta repetido
                     i--;
                 } else {
-                    if (num.contains(numero)) { //verifica si el digito esta repetido
-                        i--;
-                    } else {
-                        num.add(numero);
-                    }
-                }
-
-            }
-            else{
-                int numero = rand.nextInt(digitosList.size());
-
-                if (numero == 0 && i == 0) { // si el primer numero es 0, se descarta
-                    i--;
-                } else {
-                    if (num.contains(numero)) { //verifica si el digito esta repetido
-                        i--;
-                    } else {
-                        num.add(numero);
-                    }
+                    num.add(n);
                 }
             }
+
         }
-        String numero = "";
-        for (Object n : num) {
-            numero += n.toString();
-            this.numAleatorio = numero;
+
+        String n = "";
+        for (Object x : num) {
+            n += x.toString();
+            this.numAleatorio = n;
         }
-System.out.println("Es: "+ numAleatorio+" ?");
+        System.out.println("Es: " + numAleatorio + " ?");
         return numAleatorio;
-
     }
 
 }
