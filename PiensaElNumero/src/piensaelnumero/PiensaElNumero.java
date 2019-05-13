@@ -5,8 +5,8 @@
  */
 package piensaelnumero;
 
-import Clases.Intentos;
-import Clases.NumeroAleatorio;
+import Clases.Intentos2;
+import Clases.Numero;
 
 /**
  *
@@ -21,24 +21,14 @@ public class PiensaElNumero {
         // TODO code application logic here
         
         System.out.println("Piensa un numero de 4 digitos");
-        NumeroAleatorio aleatorio = new NumeroAleatorio();
+        Numero numero = new Numero();
+        numero.setNumero(1234);
         
       
-        Intentos i = new Intentos();
-        i.Adivinar(aleatorio);
+        Intentos2 i = new Intentos2();
+        i.Adivinar(numero);
 
-      /*  int numero;
-        int x = 1;
-        do {
-            
-
-            System.out.println("INTENTO: " + x);
-            numero = i.teclado();
-            i.coincidencias(numero, aleatorio);
-            i.regulares(numero, aleatorio);
-            x++;
-
-        } while (numero!= Integer.parseInt(aleatorio.getNumAleatorio()));*/
+    
     }
     
 }
