@@ -6,8 +6,6 @@
 package Clases;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -41,13 +39,13 @@ public class Intentos2 {
         int ingreso = reader.nextInt();
         while (ingreso > 4 || ingreso < 0) {
             System.out.println("Incorrecto");
-            this.Teclado();
+            Teclado();
         }
         return ingreso;
     }
 
     public void Adivinar(Numero valor) {
-        System.out.println("Es: "+valor.getNumero()+" ?");
+        System.out.println("Es: " + valor.getNumero() + " ?");
         System.out.println("Ingrese cantidad de numeros que estan bien");
         valor.setBien(Teclado());
 
@@ -61,18 +59,19 @@ public class Intentos2 {
 
             String num = Integer.toString(valor.getNumero());
             agregarDigitosList(num);
-            valor.setNumero(Reordenar(this.digitosList));
+            valor.setNumero(Reordenar(digitosList));
             Adivinar(valor);
 
         } else {
 
-            coleccion.put(valor.getNumero(), (valor.getRegular() + valor.getBien()));
+            coleccion.put(valor.getNumero(), (valor.getRegular() + valor.getBien())); // guardo (numero, suma de bien y regular)
             if (valor.getNumero() % 10 != 0) {
                 valor.setNumero(valor.elegirNum(valor.getNumero()));
                 Adivinar(valor);
             } else {
                 Aciertos(coleccion);
-                valor.setNumero(Reordenar(this.digitosList));
+                valor.setNumero(Reordenar(digitosList));
+                Adivinar (valor);
 
             }
 
@@ -104,7 +103,7 @@ public class Intentos2 {
             if (digitosList.contains(numero.charAt(i))) {
                 i--;
             } else {
-                digitosList.add(numero.charAt(i));
+                digitosList.add((int) numero.charAt(i));
 
             }
 
@@ -117,26 +116,25 @@ public class Intentos2 {
         Iterator it = coleccion.keySet().iterator();
         while (it.hasNext()) {
             Integer key = (Integer) it.next();
-            int valor = (int) coleccion.get(key);
+            int valor = (int) coleccion.get(key); //valor va a ser un numero entre 0 y 3
             if (valor >= numero) {
                 numero = valor;
 
             }
 
         }
-        while (it.hasNext()) {
-            Integer key = (Integer) it.next();
+        while (it.hasNext()) {                     // comparo cada suma con el valor obtenido arriba
+            Integer key = (Integer) it.next();      //obtengo sólo los candidatos con mayor cantidad de bien y regulares
             int valor = (int) coleccion.get(key);
-            if (valor == numero) {
+            if (valor == numero) {                
                 candidatos.add(key);
             }
-            for (int i = 0; i < candidatos.size(); i++) {
-                String value = candidatos.get(i).toString();
-                agregarDigitosList(value);
-            }
+            
+        }for (Object candidato : candidatos) {
+            String value = candidato.toString();
+            agregarDigitosList(value);
         }
 
     }
-    
 
 }
