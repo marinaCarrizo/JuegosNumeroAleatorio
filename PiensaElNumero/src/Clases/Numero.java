@@ -51,7 +51,7 @@ public class Numero {
 //Metodo que forma un numero aleatorio de 4 dígitos utilizando el array digitos
     public int elegirNum(int valor) {
 
-        return valor++;
+        return valor + 1;
 
     }
 

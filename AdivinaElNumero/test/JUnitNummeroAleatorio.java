@@ -42,6 +42,6 @@ public class JUnitNummeroAleatorio {
     //
     // @Test
    public void test(){
-       String result = 
+       
    }
 }

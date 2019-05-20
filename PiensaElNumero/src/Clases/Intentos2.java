@@ -6,10 +6,10 @@
 package Clases;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -18,8 +18,8 @@ import java.util.Scanner;
  */
 public class Intentos2 {
 
-    private ArrayList digitosList = new ArrayList();
-
+    private ArrayList digitosList;
+    private ArrayList digitosListProbados = new ArrayList();
     private Map<Integer, Integer> coleccion = new LinkedHashMap<Integer, Integer>();
 
     public Intentos2() {
@@ -52,6 +52,8 @@ public class Intentos2 {
         System.out.println("Ingrese cantidad de regulares");
         valor.setRegular(Teclado());
 
+        digitosList = new ArrayList();
+
         if (valor.getBien() == 4) {
             System.out.println("GANE!! El numero es " + valor.getNumero());
         }
@@ -71,7 +73,7 @@ public class Intentos2 {
             } else {
                 Aciertos(coleccion);
                 valor.setNumero(Reordenar(digitosList));
-                Adivinar (valor);
+                Adivinar(valor);
 
             }
 
@@ -80,21 +82,33 @@ public class Intentos2 {
     }
 
     public int Reordenar(ArrayList diigitosList) {
-        ArrayList num = new ArrayList();
-        Random rand = new Random();
-        for (int i = 0; i < 4; i++) {
-
-            int n = rand.nextInt(digitosList.size());
-
-            if (num.contains(n)) { //verifica si el digito esta repetido
-                i--;
-            } else {
-                num.add(n);
-            }
+        ArrayList digitosListAux = diigitosList;
+        Collections.shuffle(digitosListAux);
+        if (!digitosListProbados.contains(digitosListAux)) {
+            digitosListProbados.add(digitosListAux);
+        } else {
+            Reordenar(diigitosList);
         }
-        String valor = num.toString();
-        int valornum = Integer.parseInt(valor);
-        return valornum;
+        /*ArrayList num = new ArrayList();
+         Random rand = new Random();
+         for (int i = 0; i < 4; i++) {
+
+         int n = rand.nextInt(digitosList.size());
+
+         if (num.contains(n)) { //verifica si el digito esta repetido
+         i--;
+         } else {
+         num.add(n);
+         }
+         }
+         String valor = num.toString();
+         int valornum = Integer.parseInt(valor);
+         return valornum;*/
+        String valornum = "";
+        for (int i = 0; i < digitosListAux.size(); i++) {
+            valornum = valornum + digitosListAux.get(i);
+        }
+        return Integer.parseInt(valornum);
     }
 
     public void agregarDigitosList(String numero) {
@@ -103,8 +117,7 @@ public class Intentos2 {
             if (digitosList.contains(numero.charAt(i))) {
                 i--;
             } else {
-                digitosList.add((int) numero.charAt(i));
-
+                digitosList.add(numero.charAt(i));
             }
 
         }
@@ -126,11 +139,12 @@ public class Intentos2 {
         while (it.hasNext()) {                     // comparo cada suma con el valor obtenido arriba
             Integer key = (Integer) it.next();      //obtengo sólo los candidatos con mayor cantidad de bien y regulares
             int valor = (int) coleccion.get(key);
-            if (valor == numero) {                
+            if (valor == numero) {
                 candidatos.add(key);
             }
-            
-        }for (Object candidato : candidatos) {
+
+        }
+        for (Object candidato : candidatos) {
             String value = candidato.toString();
             agregarDigitosList(value);
         }
