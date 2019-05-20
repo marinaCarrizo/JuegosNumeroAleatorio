@@ -33,6 +33,7 @@ public class NumeroAleatorio {
         return digitos;
     }
 //Metodo que forma un numero aleatorio de 4 dígitos utilizando el array digitos
+
     public String elegirNum() {
 
         ArrayList num = new ArrayList();
@@ -54,8 +55,8 @@ public class NumeroAleatorio {
         }
         String numero = "";
         for (Object n : num) {
-            numero+= n.toString();
-            this.numAleatorio=numero;
+            numero += n.toString();
+            this.numAleatorio = numero;
         }
 
         return numAleatorio;

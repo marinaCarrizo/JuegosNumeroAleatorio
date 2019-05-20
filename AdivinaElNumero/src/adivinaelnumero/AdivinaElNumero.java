@@ -20,23 +20,15 @@ public class AdivinaElNumero {
     public static void main(String[] args) {
         // TODO code application logic here
 
+        System.out.println("Hola Pensaré en un numero de 4 dígitos distintos y debes adivinarlo");
         NumeroAleatorio aleatorio = new NumeroAleatorio();
         aleatorio.elegirNum();
-        System.out.println(aleatorio.getNumAleatorio());
+       // System.out.println(aleatorio.getNumAleatorio());
 
-        int numero;
-        int x = 1;
-        do {
-            Intentos i = new Intentos();
+        Intentos i = new Intentos();
 
-            System.out.println("INTENTO: " + x);
-            numero = i.teclado();
-            i.coincidencias(numero, aleatorio);
-            i.regulares(numero, aleatorio);
-            x++;
+        i.Adivinar(aleatorio);
 
-        } while (numero!= Integer.parseInt(aleatorio.getNumAleatorio()));
-        System.out.println("Correcto. JUEGO TERMINADO");
     }
 
 }

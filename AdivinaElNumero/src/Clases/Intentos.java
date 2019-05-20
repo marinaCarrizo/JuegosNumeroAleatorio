@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Intentos {
 
     private int regular;
-    private int coinciden;
+    private int bien;
     private NumeroAleatorio numAleatorio;
 
     public Intentos() {
@@ -29,11 +29,11 @@ public class Intentos {
     }
 
     public int getCoinciden() {
-        return coinciden;
+        return bien;
     }
 
-    public void setCoinciden(int coinciden) {
-        this.coinciden = coinciden;
+    public void setCoinciden(int bien) {
+        this.bien = bien;
     }
 
     public NumeroAleatorio getNumAleatorio() {
@@ -46,46 +46,46 @@ public class Intentos {
 
     public int teclado() {
         int numero;
+
         do {
             System.out.println("Ingrese un numero de 4 dígitos");
             Scanner reader = new Scanner(System.in);
             numero = reader.nextInt();
-            if (Integer.toString(numero).length() > 4) {
+            if (Integer.toString(numero).length() > 4 || Integer.toString(numero).length() < 4) {
                 System.out.println("Incorrecto");
 
             }
-        } while (Integer.toString(numero).length() > 4);
+        } while (Integer.toString(numero).length() > 4 || Integer.toString(numero).length() < 4);
         return numero;
+
     }
 
-    public void coincidencias(int numero, NumeroAleatorio aleato) {
-        coinciden = 0;
-        String num = Integer.toString(numero);
-        String aleatorio = aleato.getNumAleatorio();
-
-        for (int i = 0; i < num.length(); i++) {
-            if (num.charAt(i) == aleatorio.charAt(i)) {
-                coinciden++;
-            }
-
-        }
-        System.out.println("Coincidencias: " + coinciden);
-    }
-
-    public void regulares(int numero, NumeroAleatorio aleato) {
-
+    public void Adivinar(NumeroAleatorio aleato) {
+        int numero = teclado();
+        bien = 0;
         regular = 0;
         String num = Integer.toString(numero);
         String aleatorio = aleato.getNumAleatorio();
-
-        for (int i = 0; i < aleatorio.length(); i++) {
-            if (num.charAt(i) != aleatorio.charAt(i) && num.indexOf(aleatorio.charAt(i)) > -1) {
-
-                regular++;
+        for (int i = 0; i < num.length(); i++) {
+            if (num.charAt(i) == aleatorio.charAt(i)) {
+                bien++;
             }
 
         }
-        System.out.println("Regulares: " + regular);
+        System.out.println("Coincidencias: " + bien);
+        if (bien == 4) {
+            System.out.println("feliidades!! Ganaste");
+        } else {
+            for (int i = 0; i < aleatorio.length(); i++) {
+                if (num.charAt(i) != aleatorio.charAt(i) && num.indexOf(aleatorio.charAt(i)) > -1) {
+
+                    regular++;
+                }
+
+            }
+            System.out.println("Regulares: " + regular);
+            Adivinar(aleato);
+        }
 
     }
 
