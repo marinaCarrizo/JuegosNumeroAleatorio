@@ -5,6 +5,9 @@
  */
 package Clases;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -12,21 +15,31 @@ package Clases;
  */
 public class Numero {
 
-    private int numero;
+    private String numero;
     private int bien;
     private int regular;
-
-    
+    private ArrayList digitos = new ArrayList();
+    private ArrayList probados = new ArrayList();
 
     public Numero() {
 
+        digitos.add("1");
+        digitos.add("2");
+        digitos.add("3");
+        digitos.add("4");
+        digitos.add("5");
+        digitos.add("6");
+        digitos.add("7");
+        digitos.add("8");
+        digitos.add("9");
+        digitos.add("0");
     }
 
-    public int getNumero() {
+    public String getNumero() {
         return numero;
     }
 
-    public void setNumero(int numero) {
+    public void setNumero(String numero) {
         this.numero = numero;
     }
 
@@ -46,14 +59,68 @@ public class Numero {
         this.regular = regular;
     }
 
-   
+    public ArrayList getDigitos() {
+        return digitos;
+    }
 
-//Metodo que forma un numero aleatorio de 4 dígitos utilizando el array digitos
-    public int elegirNum(int valor) {
+    public void setDigitos(ArrayList digitos) {
+        this.digitos = digitos;
+    }
 
-        return valor + 1;
+    public ArrayList getProbados() {
+        return probados;
+    }
+
+    public void setProbados(ArrayList probados) {
+        this.probados = probados;
+    }
+
+//Suma 1 al numero que se le pasa
+    public String elegirNum() {
+
+        List<String> valores = new ArrayList();
+        valores.clear();;
+        valores.add((String) digitos.get(0));
+        valores.add((String) digitos.get(1));
+        valores.add((String) digitos.get(2));
+        valores.add((String) digitos.get(3));
+
+        probados(valores);
+
+        String valor = "";
+        for (int i = 0;
+                i < valores.size();
+                i++) {
+            valor = valor + valores.get(i);
+        }
+        return valor;
 
     }
 
-}
+    public void eliminarDigitos(String valor) {
+        List<String> valores = new ArrayList<String>(Arrays.asList(valor.split("")));
+        for (int i = 0; i < valores.size(); i++) {
 
+            digitos.remove(valores.get(i));
+        }
+    }
+
+    public void probados(List<String> valores) {
+
+        for (int i = 0; i < valores.size() - 1; i++) {
+            if (!probados.contains(digitos.get(i))) {
+                probados.add(digitos.get(i));
+            }
+        }
+        for (int i = 0; i < digitos.size(); i++) {
+            if (!probados.contains(digitos.get(i))) {
+                probados.add(digitos.get(i));
+                valores.remove(valores.get(3));
+                valores.add((String) digitos.get(i));
+
+                break;
+            }
+        }
+
+    }
+}

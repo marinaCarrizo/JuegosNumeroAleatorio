@@ -5,7 +5,7 @@
  */
 package piensaelnumero;
 
-import Clases.Intentos2;
+import Clases.Intento;
 import Clases.Numero;
 
 /**
@@ -22,10 +22,9 @@ public class PiensaElNumero {
         
         System.out.println("Piensa un numero de 4 digitos");
         Numero numero = new Numero();
-        numero.setNumero(1234);
-        
+        numero.setNumero(numero.elegirNum());
       
-        Intentos2 i = new Intentos2();
+        Intento i = new Intento();
         i.Adivinar(numero);
 
     
